@@ -6,9 +6,12 @@ import { dateList, timeList } from './data'
 const projectList = ['金基璟樾府', '新睿樾府', '雅玥']
 
 export default function MyPage () {
-  const [openid, setOpenid] = useState('')
   useLoad(() => {
-    console.log('Page loaded.')
+    const openid =  Taro.getStorageSync('openid')
+    console.log('Page loaded.', openid)
+    if(openid){
+      return
+    }
     wx.login({
       success: async function (res) {
         var code = res.code;
@@ -24,7 +27,6 @@ export default function MyPage () {
               }
             })
             console.log(res.data.data)
-            setOpenid(res.data.data)
             Taro.setStorageSync('openid', res.data.data)
           } catch (error) {
             console.error(error)
@@ -54,6 +56,9 @@ export default function MyPage () {
   }
 
   const submitForm = async () => {
+
+    const openid =  Taro.getStorageSync('openid')
+
     const form = {
       openid,
       name,
@@ -71,44 +76,48 @@ export default function MyPage () {
       appoint_date: '预约时间不能为空',
       appoint_number: '预约人数不能为空'
     }
-    const temp = {
-      "appoint_date": "09-01 上午",
-      "appoint_number": 12,
-      "estate_project": "金基璟樾府",
-      "name": "aa",
-      "openid": "oyvOJ69iMVuOf6nYxQQISfOL3dGk",
-      "phone": '12',
-      "room_number": "12"
+    // const temp = {
+    //   "appoint_date": "09-01 上午",
+    //   "appoint_number": 12,
+    //   "estate_project": "金基璟樾府",
+    //   "name": "aa",
+    //   "openid": "oyvOJ69iMVuOf6nYxQQISfOL3dGk",
+    //   "phone": '12',
+    //   "room_number": "12"
+    // }
+    console.log(222 ,form)
+    // 校验form 不能为空
+    for (const key in form) {
+      if (!form[key]) {
+        Taro.showToast({
+          title: map[key],
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }
     }
-    // console.log(222 ,form)
 
-    Taro.redirectTo({
-      url: `/pages/success/index?project=${"金基璟樾府"}&date=${"09-01 上午"}`
-    })
 
-    // try {
-    //   const res = await request({
-    //     url: 'https://wechat.buzhizhe.cn/kingjee2/api/addActRecord',
-    //     method: 'POST',
-    //     data:temp
-    //   })
-    //   console.log(222, res)
-    // } catch (error) {
-    //   console.error(error)
-    // }
+    try {
+      const res = await request({
+        url: 'https://wechat.buzhizhe.cn/kingjee2/api/addActRecord',
+        method: 'POST',
+        data:form
+      })
+      console.log(222, res)
+      Taro.redirectTo({
+        url: `/pages/success/index?project=${project}&date=${date}`
+      })
+    } catch (error) {
+      console.error(error)
+      Taro.showToast({
+        title: '预约失败',
+        icon: 'none',
+        duration: 2000
+      })
+    }
 
-    // try {
-    //   const res = await request({
-    //     url: 'https://wechat.buzhizhe.cn/kingjee2/api/getRecordByOpenid',
-    //     method: 'POST',
-    //     data:{
-    //       openid
-    //     }
-    //   })
-    //   console.log(333, res)
-    // } catch (error) {
-    //   console.error(error)
-    // }
 
   }
   return (

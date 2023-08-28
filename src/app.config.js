@@ -1,12 +1,9 @@
 export default defineAppConfig({
   pages: [
-
-    "pages/my/index",
-
     "pages/index/index",
     "pages/yuyue/index",
+    "pages/my/index",
     "pages/success/index",
-
   ],
   window: {
     backgroundTextStyle: "light",
@@ -25,12 +22,6 @@ export default defineAppConfig({
         pagePath: "pages/index/index",
         text: "首页",
       },
-      // {
-      //   selectedIconPath: "images/i1s.png",
-      //   iconPath: "images/i1.png",
-      //   pagePath: "pages/yuyue/index",
-      //   text: "预约",
-      // },
       {
         selectedIconPath: "images/i2s.png",
         iconPath: "images/i2.png",

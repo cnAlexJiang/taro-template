@@ -1,5 +1,5 @@
 import { View, Text, Image, Swiper, SwiperItem, Input, Picker } from '@tarojs/components'
-import { useLoad,navigateTo,redirectTo } from '@tarojs/taro'
+import { useLoad, navigateTo, redirectTo } from '@tarojs/taro'
 import './index.less'
 import { useState, useEffect } from 'react'
 
@@ -138,10 +138,10 @@ export default function Index () {
                 src='http://pic.buzhizhe.cn/o_1h8u128r314dp1uoppg712fdaasa.png'
               />
               <Image
-          className='bottom-img'
-          scaleToFill='aspectFit'
-          src='http://pic.buzhizhe.cn/o_1h8u1mcd57n821o1g3a1ofl8ria.png'
-        />
+                className='bottom-img'
+                scaleToFill='aspectFit'
+                src='http://pic.buzhizhe.cn/o_1h8u1mcd57n821o1g3a1ofl8ria.png'
+              />
             </View>
           </SwiperItem>
         </Swiper>

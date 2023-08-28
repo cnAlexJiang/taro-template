@@ -25,12 +25,11 @@ export default function MyPage () {
             })
             console.log(res.data.data)
             setOpenid(res.data.data)
+            Taro.setStorageSync('openid', res.data.data)
           } catch (error) {
             console.error(error)
           }
-
           // ------------------------------------
-
         } else {
           console.log('获取用户登录态失败：' + res.errMsg);
         }

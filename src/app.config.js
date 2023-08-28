@@ -1,9 +1,11 @@
 export default defineAppConfig({
   pages: [
+
+    "pages/my/index",
+
     "pages/index/index",
     "pages/yuyue/index",
     "pages/success/index",
-    "pages/my/index",
 
   ],
   window: {

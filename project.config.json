@@ -2,9 +2,9 @@
   "miniprogramRoot": "dist/",
   "projectname": "myApp",
   "description": "house",
-  "appid": "wx164c74b4ec244baf",
+  "appid": "wx97ca14161f9a4a71",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "enhance": false,
     "postcss": false,

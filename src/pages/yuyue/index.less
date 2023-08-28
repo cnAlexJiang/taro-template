@@ -1,0 +1,114 @@
+.root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.form-page {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  .background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: inherit;
+  }
+  .top-img {
+    position: absolute;
+    width: 192rpx;
+    height: 22rpx;
+    top: 60rpx;
+    left: 82rpx;
+  }
+  .bottom-img {
+    position: absolute;
+    width: 286rpx;
+    height: 336rpx;
+    bottom: 0;
+    right: 0;
+  }
+
+  .form-content {
+    position: absolute;
+    width: 750rpx;
+    height: 626rpx;
+    top: 160rpx;
+    left: 0rpx;
+    .form-img {
+      position: absolute;
+      width: 750rpx;
+      height: 626rpx;
+      top: 0rpx;
+      left: 0rpx;
+    }
+    .form-name {
+      position: absolute;
+      left: 266rpx;
+      top: 24rpx;
+       // background: red;
+    }
+    .form-phone {
+      position: absolute;
+      left: 266rpx;
+      top: 129rpx;
+      // 24 +105+ 微调
+       // background: red;
+    }
+    .form-yezhu {
+      position: absolute;
+      left: 266rpx;
+      top: 234rpx;
+      // 129 +105+ 微调
+       // background: red;
+      .picker {
+        width: 336rpx;
+        height: 44rpx;
+      }
+    }
+    .form-donghao {
+      position: absolute;
+      left: 266rpx;
+      top: 342rpx;
+      // 129 +105 + 105 + 微调
+      //  background: red;
+    }
+    .form-date {
+      position: absolute;
+      left: 266rpx;
+      top: 447rpx;
+      // 129 +105 + 105 + 微调
+       // background: red;
+      display: flex;
+      .picker {
+        width: 200rpx;
+        height: 44rpx;
+      }
+    }
+    .form-renshu {
+      position: absolute;
+      left: 266rpx;
+      top: 552rpx;
+      // 399 105 + 105
+       // background: red;
+    }
+  }
+
+  .yuyue-button {
+    position: absolute;
+    width: 193rpx;
+    height: 53rpx;
+    top: 862rpx;
+    left: 279rpx;
+  }
+
+  .contact-me {
+    position: absolute;
+    width: 219rpx;
+    height: 46rpx;
+    top: 1002rpx;
+    left: 266rpx;
+  }
+}

@@ -1,14 +1,14 @@
 import { View, Text, Image, Swiper, SwiperItem, Input, Picker } from '@tarojs/components'
-import Taro, { useLoad } from '@tarojs/taro'
+import Taro, { useLoad, useShareAppMessage } from '@tarojs/taro'
 import './index.less'
-import {useState} from 'react'
+import { useState } from 'react'
 export default function MyPage () {
 
   const [list, setList] = useState([])
 
   const fetchList = async () => {
     try {
-      const openid =  Taro.getStorageSync('openid')
+      const openid = Taro.getStorageSync('openid')
       const res = await Taro.request({
         url: 'https://wechat.buzhizhe.cn/kingjee2/api/getRecordByOpenid',
         method: 'POST',
@@ -21,11 +21,18 @@ export default function MyPage () {
       console.error(error)
     }
   }
-
+  useShareAppMessage((res) => {
+    console.log('onShareAppMessage', res)
+    return {
+      title: "金基业主会所体验预约",
+      path: "/pages/index/index",
+      imageUrl: "http://pic.buzhizhe.cn/o_1h905jpu31kkds2e1ia3150r1bcqa.jpg",
+    };
+  })
   useLoad(() => {
-    const openid =  Taro.getStorageSync('openid')
+    const openid = Taro.getStorageSync('openid')
     console.log('Page loaded.', openid)
-    if(openid){
+    if (openid) {
       fetchList()
       return
     }

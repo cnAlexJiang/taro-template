@@ -6,7 +6,7 @@ import prodConfig from './prod'
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
 export default defineConfig(async (merge, { command, mode }) => {
   const baseConfig = {
-    projectName: 'myApp',
+    projectName: '金基业主会所体验预约',
     date: '2023-8-28',
     designWidth: 750,
     deviceRatio: {

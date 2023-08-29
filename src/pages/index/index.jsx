@@ -1,5 +1,5 @@
 import { View, Text, Image, Swiper, SwiperItem, Input, Picker } from '@tarojs/components'
-import { useLoad, navigateTo, redirectTo } from '@tarojs/taro'
+import { useLoad, navigateTo, redirectTo, useShareAppMessage } from '@tarojs/taro'
 import './index.less'
 import { useState, useEffect } from 'react'
 
@@ -15,6 +15,14 @@ export default function Index () {
   const [phone, setPhone] = useState('')
   const [renshu, setRenshu] = useState('')
 
+  useShareAppMessage((res)=>{
+      console.log('onShareAppMessage', res)
+      return {
+        title: "金基业主会所体验预约",
+        path: "/pages/index/index",
+        imageUrl: "http://pic.buzhizhe.cn/o_1h905jpu31kkds2e1ia3150r1bcqa.jpg",
+      };
+  })
 
   useLoad(() => {
     console.log('Page loaded.')

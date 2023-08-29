@@ -1,6 +1,6 @@
 {
   "miniprogramRoot": "./",
-  "projectname": "myApp",
+  "projectname": "金基业主会所体验预约",
   "appid": "testAppId",
   "setting": {
     "es6": false,

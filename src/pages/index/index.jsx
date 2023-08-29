@@ -36,9 +36,9 @@ export default function Index () {
     setDate(e.detail.value)
   }
 
-  const jumpYuYue = async () => {
+  const jumpYuYue = async (addresss) => {
     redirectTo({
-      url: '/pages/yuyue/index',
+      url: '/pages/yuyue/index' + (addresss ? `?address=${addresss}` : ''),
     })
   }
   const onSwoperChange = (e) => {
@@ -121,19 +121,20 @@ export default function Index () {
                 className='content'
                 src=' http://pic.buzhizhe.cn/o_1h8tp2iap4lhcp7qkq18rd14kda.png'
               />
+           {/*  ['金基璟樾府', '新睿樾府', '雅玥'] */}
 
               <Image
-                onClick={jumpYuYue}
+                onClick={()=>{jumpYuYue('金基璟樾府')}}
                 className='top animate__pulse'
                 src='http://pic.buzhizhe.cn/o_1h8u0vcphoad5dr1eto8l41gvle.png'
               />
               <Image
-                onClick={jumpYuYue}
+                onClick={()=>{jumpYuYue('新睿樾府')}}
                 className='middle animate__pulse'
                 src='http://pic.buzhizhe.cn/o_1h8u135mrnivah4c211qv33ua.png'
               />
               <Image
-                onClick={jumpYuYue}
+                onClick={()=>{jumpYuYue('雅玥')}}
                 className='bottom animate__pulse'
                 src='http://pic.buzhizhe.cn/o_1h8u128r314dp1uoppg712fdaasa.png'
               />

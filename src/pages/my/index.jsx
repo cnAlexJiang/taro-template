@@ -80,7 +80,7 @@ export default function MyPage () {
 
       <View className='list-content'>
         {list.map(item => (<View className='list-item'>
-          <Text className='item-top'>预约项目: {item.estate_project} </Text>
+          <Text className='item-top'>预约项目: {item.address} </Text>
           <Text>预约时间: {item.appoint_date}</Text>
         </View>))}
       </View>

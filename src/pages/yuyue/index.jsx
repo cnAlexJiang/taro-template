@@ -1,15 +1,20 @@
 import { View, Text, Image, Swiper, SwiperItem, Input, Picker } from '@tarojs/components'
-import Taro, { useLoad, request } from '@tarojs/taro'
+import Taro, { useLoad, request, getCurrentInstance } from '@tarojs/taro'
 import './index.less'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, version } from 'react'
 import { dateList, timeList } from './data'
-const projectList = ['金基璟樾府', '新睿樾府', '雅玥']
+const projectList = ['望越府', '璞悦和园', '嘉玥', '朗樾府', '涵樾府', '皓樾']
 
 export default function MyPage () {
+  const [address, setAddress] = useState('')
+  console.log('address', address)
+
   useLoad(() => {
-    const openid =  Taro.getStorageSync('openid')
-    console.log('Page loaded.', openid)
-    if(openid){
+    const { router } = getCurrentInstance();
+    setAddress(router.params.address)
+    const openid = Taro.getStorageSync('openid')
+    console.log('Page loaded.', openid, address)
+    if (openid) {
       return
     }
     wx.login({
@@ -37,7 +42,6 @@ export default function MyPage () {
         }
       }
     });
-
   })
   const [project, setProject] = useState('')
   const [date, setDate] = useState('')
@@ -55,15 +59,33 @@ export default function MyPage () {
     setDate(`${dateList[value[0]]} ${timeList[value[1]]}`)
   }
 
+  const svalidatePhoneNumber = (phoneNumber) => {
+    // 定义支持的号段正则表达式
+    let mobileRegex =
+      /^(13[4-9]|14[7]|15[0-2,7-9]|17[2,8]|18[2-4,7-8]|19[8-9])\d{8}$/;
+    let telecomRegex = /^(133|149|153|17[3,7]|18[0-1,9]|19[9])\d{8}$/;
+    let unicomRegex = /^(13[0-2]|145|15[5-6]|166|17[5-6]|18[5-6]|196)\d{8}$/;
+
+    // 使用正则表达式进行校验
+    if (mobileRegex.test(phoneNumber)) {
+      return true;
+    } else if (telecomRegex.test(phoneNumber)) {
+      return true;
+    } else if (unicomRegex.test(phoneNumber)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   const submitForm = async () => {
-
-    const openid =  Taro.getStorageSync('openid')
-
+    const openid = Taro.getStorageSync('openid')
     const form = {
       openid,
       name,
       phone: phone + '',
       estate_project: project,
+      address,
       room_number: fanghao,
       appoint_date: date,
       appoint_number: renshu
@@ -74,18 +96,11 @@ export default function MyPage () {
       estate_project: '项目业主不能为空',
       room_number: '房号不能为空',
       appoint_date: '预约时间不能为空',
-      appoint_number: '预约人数不能为空'
+      appoint_number: '预约人数不能为空',
+      address: '预约项目地址异常'
     }
-    // const temp = {
-    //   "appoint_date": "09-01 上午",
-    //   "appoint_number": 12,
-    //   "estate_project": "金基璟樾府",
-    //   "name": "aa",
-    //   "openid": "oyvOJ69iMVuOf6nYxQQISfOL3dGk",
-    //   "phone": '12',
-    //   "room_number": "12"
-    // }
-    console.log(222 ,form)
+
+    console.log(222, form)
     // 校验form 不能为空
     for (const key in form) {
       if (!form[key]) {
@@ -97,17 +112,25 @@ export default function MyPage () {
         return
       }
     }
+    if (!svalidatePhoneNumber(phone)) {
+      Taro.showToast({
+        title: '手机号格式不正确',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
 
-
+    // return
     try {
       const res = await request({
         url: 'https://wechat.buzhizhe.cn/kingjee2/api/addActRecord',
         method: 'POST',
-        data:form
+        data: form
       })
       console.log(222, res)
       Taro.redirectTo({
-        url: `/pages/success/index?project=${project}&date=${date}`
+        url: `/pages/success/index?project=${address}&date=${date}`
       })
     } catch (error) {
       console.error(error)
@@ -147,10 +170,10 @@ export default function MyPage () {
             src='http://pic.buzhizhe.cn/o_1h8u3ee734c41mr4fpjbqh1rp9a.png'
           />
 
-          <Input type='text' className='form-name' focus value={name} onInput={(e) => {
+          <Input type='text' className='form-name' value={name} onInput={(e) => {
             setName(e.target.value)
           }} />
-          <Input type='number' className='form-phone' focus maxlength="11" value={phone} onInput={(e) => {
+          <Input type='number' className='form-phone' maxlength="11" value={phone} onInput={(e) => {
             console.log(11, e.target.value)
             setPhone(+e.target.value)
           }} />
@@ -163,7 +186,7 @@ export default function MyPage () {
             </Picker>
           </View>
 
-          <Input type='text' className='form-donghao' value={fanghao} focus onInput={(e) => {
+          <Input type='text' className='form-donghao' value={fanghao} onInput={(e) => {
             setFanghao(e.target.value)
           }} />
 
@@ -174,8 +197,15 @@ export default function MyPage () {
               </View>
             </Picker>
           </View>
-          <Input type='number' className='form-renshu' focus value={renshu} onInput={(e) => {
-            setRenshu(+e.target.value)
+          <Input type='number' className='form-renshu' maxlength={2} value={renshu} onInput={(e) => {
+            const v = +e.target.value
+            if(isNaN(v)){
+              setRenshu(1)
+            } else if (v > 10) {
+              setRenshu(10)
+            } else {
+              setRenshu(v)
+            }
           }} />
         </View>
 

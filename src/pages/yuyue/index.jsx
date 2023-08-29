@@ -3,12 +3,12 @@ import Taro, { useLoad, request, getCurrentInstance } from '@tarojs/taro'
 import './index.less'
 import { useState, useEffect, version } from 'react'
 import { dateList, timeList } from './data'
-const projectList = ['望越府', '璞悦和园', '嘉玥', '朗樾府', '涵樾府', '皓樾']
+const projectList = ['望樾府', '璞悦和园', '嘉玥', '朗樾府', '涵樾府', '皓樾']
+const renshuList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+let nextWorkLock = false
 
 export default function MyPage () {
   const [address, setAddress] = useState('')
-  console.log('address', address)
-
   useLoad(() => {
     const { router } = getCurrentInstance();
     setAddress(router.params.address)
@@ -31,7 +31,6 @@ export default function MyPage () {
                 code
               }
             })
-            console.log(res.data.data)
             Taro.setStorageSync('openid', res.data.data)
           } catch (error) {
             console.error(error)
@@ -100,7 +99,7 @@ export default function MyPage () {
       address: '预约项目地址异常'
     }
 
-    console.log(222, form)
+    // console.log(222, form)
     // 校验form 不能为空
     for (const key in form) {
       if (!form[key]) {
@@ -121,14 +120,17 @@ export default function MyPage () {
       return
     }
 
-    // return
+    if (nextWorkLock) {
+      return
+    }
+
     try {
+      nextWorkLock = true
       const res = await request({
         url: 'https://wechat.buzhizhe.cn/kingjee2/api/addActRecord',
         method: 'POST',
         data: form
       })
-      console.log(222, res)
       Taro.redirectTo({
         url: `/pages/success/index?project=${address}&date=${date}`
       })
@@ -139,9 +141,9 @@ export default function MyPage () {
         icon: 'none',
         duration: 2000
       })
+    } finally {
+      nextWorkLock = false
     }
-
-
   }
   return (
     <View className='root'>
@@ -174,7 +176,6 @@ export default function MyPage () {
             setName(e.target.value)
           }} />
           <Input type='number' className='form-phone' maxlength="11" value={phone} onInput={(e) => {
-            console.log(11, e.target.value)
             setPhone(+e.target.value)
           }} />
 
@@ -197,7 +198,17 @@ export default function MyPage () {
               </View>
             </Picker>
           </View>
-          <Input type='number' className='form-renshu' maxlength={2} value={renshu} onInput={(e) => {
+          <View className='form-renshu'>
+            <Picker mode='selector' range={renshuList} onChange={(e) => {
+              setRenshu(renshuList[e.detail.value])
+            }}>
+              <View className='picker'>
+                {renshu ? renshu : ''}
+              </View>
+            </Picker>
+          </View>
+
+          {/* <Input type='number' className='form-renshu' maxlength={2} value={renshu} onInput={(e) => {
             const v = +e.target.value
             if(isNaN(v)){
               setRenshu(1)
@@ -206,7 +217,7 @@ export default function MyPage () {
             } else {
               setRenshu(v)
             }
-          }} />
+          }} /> */}
         </View>
 
 

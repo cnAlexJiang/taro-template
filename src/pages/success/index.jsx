@@ -10,7 +10,6 @@ export default function MyPage () {
   useLoad(() => {
     console.log('Page loaded.',)
     const { router } = getCurrentInstance();
-    console.log(222, router.params) // 参数接收
     setProject(router.params.project)
     setDate(router.params.date)
 

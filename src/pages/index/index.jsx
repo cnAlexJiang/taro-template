@@ -20,7 +20,6 @@ export default function Index () {
     console.log('Page loaded.')
   })
   const clickHandler = () => {
-    console.log('click')
     setCurrent(current + 1)
   }
   const catchTouchMove = () => {
@@ -42,9 +41,12 @@ export default function Index () {
     })
   }
   const onSwoperChange = (e) => {
-    console.log(111, e.target.current)
     setCurrent(e.target.current)
   }
+  const onTransition = (e) => {
+      return false
+  }
+
   return (
     <View className='root'>
       <View className='container'>
@@ -57,7 +59,7 @@ export default function Index () {
           vertical
           circular
           disableTouch={true}
-          disableTouchmove='true'
+          disableTouchmove
           onChange={onSwoperChange}
           indicatorDots={false}
           autoplay={false}>

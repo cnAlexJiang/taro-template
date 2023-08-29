@@ -16,7 +16,6 @@ export default function MyPage () {
           openid
         }
       })
-      console.log(333, res)
       setList(res.data.data)
     } catch (error) {
       console.error(error)
@@ -34,7 +33,7 @@ export default function MyPage () {
       success: async function (res) {
         var code = res.code;
         if (code) {
-          console.log('获取用户登录凭证：' + code);
+          // console.log('获取用户登录凭证：' + code);
           try {
             // --------- 发送凭证 ------------------
             const res = await Taro.request({

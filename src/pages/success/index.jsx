@@ -30,7 +30,7 @@ export default function MyPage () {
         />
         <Image
           className='middle-image'
-          src='http://pic.buzhizhe.cn/o_1h8uglj3e1h3q7n1sdodfolfla.png'
+          src='http://pic.buzhizhe.cn/o_1h90c34m31ft0dnjnep43u7pla.png'
           scaleToFill='aspectFit'
         />
         <Image
@@ -74,7 +74,7 @@ export default function MyPage () {
         />
         <Image
           className='middle-image'
-          src='http://pic.buzhizhe.cn/o_1h8uglj3e1h3q7n1sdodfolfla.png'
+          src='http://pic.buzhizhe.cn/o_1h90c34m31ft0dnjnep43u7pla.png'
           scaleToFill='aspectFit'
         />
         <Image
@@ -117,7 +117,7 @@ export default function MyPage () {
         />
         <Image
           className='middle-image'
-          src='http://pic.buzhizhe.cn/o_1h8uglj3e1h3q7n1sdodfolfla.png'
+          src='http://pic.buzhizhe.cn/o_1h90c34m31ft0dnjnep43u7pla.png'
           scaleToFill='aspectFit'
         />
         <Image

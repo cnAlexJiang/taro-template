@@ -4,7 +4,8 @@ import './index.less'
 import { useState, useEffect, version } from 'react'
 import { dateList, timeList } from './data'
 const projectList = ['望樾府', '璞悦和园', '嘉玥', '朗樾府', '涵樾府', '皓樾']
-const renshuList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const renshuList = [1, 2, 3, 4]
+
 let nextWorkLock = false
 
 export default function MyPage () {

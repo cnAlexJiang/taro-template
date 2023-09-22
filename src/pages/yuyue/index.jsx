@@ -231,7 +231,7 @@ export default function MyPage () {
         <Image
           className='contact-me'
           scaleToFill='aspectFit'
-          src='http://pic.buzhizhe.cn/o_1h8u8h0hn1oeq11oj10qj1ii8199ua.png'
+          src='http://pic.buzhizhe.cn/o_1h95jath5k4qp7r1dn2beu165na.png'
         />
       </View>
     </View>

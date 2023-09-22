@@ -23,14 +23,18 @@ export function getAvailableDates( ) {
   const bookingEndTime = 18;
   const minAdvanceDays =  currentHour >= bookingEndTime ? 2 : 1;
   const maxAdvanceDays = currentHour >= bookingEndTime ? 8 : 7;
+  const lastAdvanceDays = new Date('Sat Dec 30 2023 10:54:17 GMT+0800')
+  lastAdvanceDays.setHours(0, 0, 0, 0);
 
   const availableDates = [];
 
   for (let i = minAdvanceDays; i <= maxAdvanceDays; i++) {
       const availableDate = new Date(today);
       availableDate.setDate(today.getDate() + i);
-
       availableDates.push(formatDate(availableDate));
+      if(availableDate.getTime() === lastAdvanceDays.getTime()) {
+        break;
+      }
   }
 
   return availableDates;

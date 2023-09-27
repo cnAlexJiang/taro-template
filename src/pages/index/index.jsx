@@ -115,7 +115,7 @@ export default function Index () {
               <Image
                 className='show-image'
                 scaleToFill='widthFix'
-                src='http://pic.buzhizhe.cn/o_1h8thvf4v69o8lv1r4ssl81iffa.png'
+                src='http://pic.buzhizhe.cn/o_1hbbda1dd1p06abf8v61k4s6q2a.png'
               />
               <Image
                 onClick={clickHandler}
